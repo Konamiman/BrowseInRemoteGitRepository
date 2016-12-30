@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("TheVsixExtension")]
+[assembly: AssemblyTitle("Browse in remote Git repository VS extension")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("TheVsixExtension")]
-[assembly: AssemblyCopyright("")]
+[assembly: AssemblyCompany("Konamiman")]
+[assembly: AssemblyProduct("Browse in remote Git repository VS extension")]
+[assembly: AssemblyCopyright("(c) Konamiman 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
