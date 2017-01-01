@@ -63,10 +63,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="index.html" />
     <Content Include="Resources\BrowseInRemoteGitRepoCommand.png" />
     <Content Include="Resources\BrowseInRemoteGitRepoCommand.ico" />
-    <Content Include="stylesheet.css" />
     <VSCTCompile Include="BrowseInRemoteGitRepoCommandPackage.vsct">
       <ResourceName>Menus.ctmenu</ResourceName>
     </VSCTCompile>
