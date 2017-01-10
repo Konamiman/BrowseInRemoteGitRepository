@@ -26,8 +26,6 @@ For example, if you want the command to always open Firefox, run the following: 
 ### Known problems ###
 
 * If the solution does not live in a local Git repository, the menu entries should not appear, but they will and clicking them will display an error. Then they will not appear anymore within the current Visual Studio session.
-* The menu entries will not appear when clicking in the code editor for `.cshtml` files. They will still appear in the context menu for Solution Explorer, though.
-* A Visual Studio solution or project is required for the menu entries to appear for Solution Explorer (they will not appear when using "Open Web Site"). However you can still use the menu entries for the code editor in this case.
 * The generated URL will always contain the line number if the file is open in Visual Studio, even if the command was executed through Solution Explorer.
 
 ### Finally... ###

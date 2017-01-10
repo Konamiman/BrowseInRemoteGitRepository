@@ -42,6 +42,12 @@
       <Group guid="guidBrowseInRemoteGitRepoCommandPackageCmdSet" id="MyMenuGroup" priority="0x0600">
         <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_CODEWIN"/>
       </Group>
+      <Group guid="guidBrowseInRemoteGitRepoCommandPackageCmdSet" id="MyMenuGroup" priority="0x0600">
+        <Parent guid="guidCshtmlCodeEditor" id="IDM_VS_TOOL_STANDARD"/>
+      </Group>
+      <Group guid="guidBrowseInRemoteGitRepoCommandPackageCmdSet" id="MyMenuGroup" priority="0x0600">
+        <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_WEBITEMNODE"/>
+      </Group>
     </Groups>
 
     <!--Buttons section. -->
@@ -104,5 +110,7 @@
       <IDSymbol name="bmpPicArrows" value="5" />
       <IDSymbol name="bmpPicGit" value="6" />
     </GuidSymbol>
+
+    <GuidSymbol name="guidCshtmlCodeEditor" value="{78F03954-2FB8-4087-8CE7-59D71710B3BB}" />
   </Symbols>
 </CommandTable>
