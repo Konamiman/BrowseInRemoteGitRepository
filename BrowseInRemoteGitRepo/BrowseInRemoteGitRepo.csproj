@@ -63,6 +63,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="LICENSE.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="RELEASE_NOTES.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <Content Include="Resources\BrowseInRemoteGitRepoCommand.png" />
     <Content Include="Resources\BrowseInRemoteGitRepoCommand.ico" />
     <VSCTCompile Include="BrowseInRemoteGitRepoCommandPackage.vsct">
