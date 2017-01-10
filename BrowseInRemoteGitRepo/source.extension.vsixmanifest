@@ -3,7 +3,7 @@
   <Metadata>
     <Identity Id="Konamiman.BrowseInRemoteGitRepo.34224d0e-a924-4690-844d-f2385996b08c" Version="1.1" Language="en-US" Publisher="Néstor Soriano Vilchez" />
     <DisplayName>Browse in remote Git repository</DisplayName>
-    <Description xml:space="preserve">Adds "Brose in remote Git repository" to context menu in solution explorer and in the code editor.</Description>
+    <Description xml:space="preserve">Adds "Browse in remote Git repository" to context menu in solution explorer and in the code editor.</Description>
     <MoreInfo>https://github.com/Konamiman/BrowseInRemoteGitRepository</MoreInfo>
     <License>LICENSE.txt</License>
     <GettingStartedGuide>https://marketplace.visualstudio.com/items?itemName=MSXrules.BrowseinremoteGitrepository</GettingStartedGuide>
