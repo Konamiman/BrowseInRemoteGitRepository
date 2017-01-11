@@ -63,18 +63,19 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="LICENSE.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Content Include="..\LICENSE.txt">
+      <Link>LICENSE.txt</Link>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
-    <Content Include="RELEASE_NOTES.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Content Include="..\RELEASE_NOTES.txt">
+      <Link>RELEASE_NOTES.txt</Link>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
     <Content Include="Resources\BrowseInRemoteGitRepoCommand.png" />
     <Content Include="Resources\BrowseInRemoteGitRepoCommand.ico" />
     <VSCTCompile Include="BrowseInRemoteGitRepoCommandPackage.vsct">
       <ResourceName>Menus.ctmenu</ResourceName>
+      <SubType>Designer</SubType>
     </VSCTCompile>
   </ItemGroup>
   <ItemGroup>

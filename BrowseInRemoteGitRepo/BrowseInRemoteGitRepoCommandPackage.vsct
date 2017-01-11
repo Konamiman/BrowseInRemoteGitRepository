@@ -48,6 +48,24 @@
       <Group guid="guidBrowseInRemoteGitRepoCommandPackageCmdSet" id="MyMenuGroup_se" priority="0x0600">
         <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_WEBITEMNODE"/>
       </Group>
+      <Group guid="guidBrowseInRemoteGitRepoCommandPackageCmdSet" id="MyMenuGroup" priority="0x0600">
+        <Parent guid="guidCss" id="idCss"/>
+      </Group>
+      <Group guid="guidBrowseInRemoteGitRepoCommandPackageCmdSet" id="MyMenuGroup" priority="0x0600">
+        <Parent guid="guidJson" id="idJson"/>
+      </Group>
+      <Group guid="guidBrowseInRemoteGitRepoCommandPackageCmdSet" id="MyMenuGroup" priority="0x0600">
+        <Parent guid="guidMisc" id="idMd"/>
+      </Group>
+      <Group guid="guidBrowseInRemoteGitRepoCommandPackageCmdSet" id="MyMenuGroup" priority="0x0600">
+        <Parent guid="guidMisc" id="idAsp"/>
+      </Group>
+      <Group guid="guidBrowseInRemoteGitRepoCommandPackageCmdSet" id="MyMenuGroup" priority="0x0600">
+        <Parent guid="guidMisc" id="idWsf"/>
+      </Group>
+      <Group guid="guidBrowseInRemoteGitRepoCommandPackageCmdSet" id="MyMenuGroup" priority="0x0600">
+        <Parent guid="guidXaml" id="idXaml"/>
+      </Group>
     </Groups>
 
     <!--Buttons section. -->
@@ -131,5 +149,24 @@
     </GuidSymbol>
 
     <GuidSymbol name="guidCshtmlCodeEditor" value="{78F03954-2FB8-4087-8CE7-59D71710B3BB}" />
+
+    <GuidSymbol name="guidCss" value="{64DA400E-B4AD-4D67-AA92-4B7ACB01ECD5}" >
+      <IDSymbol name="idCss" value="2" />
+    </GuidSymbol>
+
+    <GuidSymbol name="guidJson" value="{F718CA06-CF4F-4A0C-9106-E79E9EE5E7CD}" >
+      <IDSymbol name="idJson" value="3" />
+    </GuidSymbol>
+
+    <GuidSymbol name="guidMisc" value="{D7E8C5E1-BDB8-11D0-9C88-0000F8040A53}" >
+      <IDSymbol name="idMd" value="48" />
+      <IDSymbol name="idAsp" value="51" />
+      <IDSymbol name="idWsf" value="50" />
+    </GuidSymbol>
+
+    <GuidSymbol name="guidXaml" value="{4C87B692-1202-46AA-B64C-EF01FAEC53DA}" >
+      <IDSymbol name="idXaml" value="259" />
+    </GuidSymbol>
+
   </Symbols>
 </CommandTable>

@@ -8,3 +8,4 @@ v1.2  2017-01-11
 
 - Fix: context menu entries appearing even if the files are not in a Git repository
 - Fix: line number being included in the generated url whenever the file is open in code editor, even if menu entry is clicked from solution explorer
+- Fix: context menu entries not appearing in code editor for .css, .less, .scss, .json, .md, .asp, .wsf and .xaml files
