@@ -222,8 +222,6 @@ namespace Konamiman.BrowseInRemoteGitRepo
             Instance = new BrowseInRemoteGitRepoCommand(package);
         }
 
-        private bool alreadyInvoked = false;
-
         private void BrowseMenuItemCallback(object sender, EventArgs e)
         {
             MenuItemCallback(sender, e, StartProcess, true);
@@ -286,13 +284,6 @@ namespace Konamiman.BrowseInRemoteGitRepo
 
         private void MenuItemCallback(object sender, EventArgs e, Action<string> processUrl, bool validateUrl)
         {
-            if (!alreadyInvoked) {
-                //For some reason the first time that the command is invoked
-                //it does not fire BeforeQueryStatus, so let's "fire" it manually
-                MenuItemOnBeforeQueryStatus(sender, e);
-                alreadyInvoked = true;
-            }
-
             if(fileName == null) {
                 Show("Error: no file selected");
                 return;

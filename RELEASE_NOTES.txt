@@ -2,3 +2,8 @@ v1.1  2017-01-10
 
 - Fix: context menu entries not appearing in code editor for .cshtml files
 - Fix: context menu entries not appearing in solution explorer when using "Open Web Site"
+
+
+v1.2  2017-01-11
+
+- Fix: context menu entries appearing even if the files are not in a Git repository
