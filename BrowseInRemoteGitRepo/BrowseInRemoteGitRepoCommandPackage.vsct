@@ -36,7 +36,7 @@
          group as the part of a menu contained between two lines. The parent of a group
          must be a menu. -->
     <Groups>
-      <Group guid="guidBrowseInRemoteGitRepoCommandPackageCmdSet" id="MyMenuGroup" priority="0x0600">
+      <Group guid="guidBrowseInRemoteGitRepoCommandPackageCmdSet" id="MyMenuGroup_se" priority="0x0600">
         <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_ITEMNODE"/>
       </Group>
       <Group guid="guidBrowseInRemoteGitRepoCommandPackageCmdSet" id="MyMenuGroup" priority="0x0600">
@@ -45,7 +45,7 @@
       <Group guid="guidBrowseInRemoteGitRepoCommandPackageCmdSet" id="MyMenuGroup" priority="0x0600">
         <Parent guid="guidCshtmlCodeEditor" id="IDM_VS_TOOL_STANDARD"/>
       </Group>
-      <Group guid="guidBrowseInRemoteGitRepoCommandPackageCmdSet" id="MyMenuGroup" priority="0x0600">
+      <Group guid="guidBrowseInRemoteGitRepoCommandPackageCmdSet" id="MyMenuGroup_se" priority="0x0600">
         <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_WEBITEMNODE"/>
       </Group>
     </Groups>
@@ -77,6 +77,23 @@
         <ButtonText>Copy URL of remote repository version</ButtonText>
       </Strings>
       </Button>
+
+      <Button guid="guidBrowseInRemoteGitRepoCommandPackageCmdSet" id="BrowseInRemoteGitRepoCommandId_se" priority="0x0100" type="Button">
+        <Parent guid="guidBrowseInRemoteGitRepoCommandPackageCmdSet" id="MyMenuGroup_se" />
+        <Icon guid="guidImages" id="bmpPicGit" />
+        <CommandFlag>DynamicVisibility</CommandFlag>
+        <Strings>
+          <ButtonText>Browse in remote repository</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="guidBrowseInRemoteGitRepoCommandPackageCmdSet" id="CopyRemoteGitRepoUrlCommandId_se" priority="0x0100" type="Button">
+        <Parent guid="guidBrowseInRemoteGitRepoCommandPackageCmdSet" id="MyMenuGroup_se" />
+        <Icon guid="guidImages" id="bmpPicGit" />
+        <CommandFlag>DynamicVisibility</CommandFlag>
+        <Strings>
+          <ButtonText>Copy URL of remote repository version</ButtonText>
+        </Strings>
+      </Button>
     </Buttons>
 
     <!--The bitmaps section is used to define the bitmaps that are used for the commands.-->
@@ -93,13 +110,15 @@
   <Symbols>
     <!-- This is the package guid. -->
     <GuidSymbol name="guidBrowseInRemoteGitRepoCommandPackage" value="{614dc5e6-d9cc-4388-8d61-e601041dd8a5}" />
-    <GuidSymbol name="guidBrowseInRemoteGitRepoCommandPackage2" value="{614dc5e6-d9cc-4388-8d61-e601041dd8a6}" />
 
     <!-- This is the guid used to group the menu commands together -->
     <GuidSymbol name="guidBrowseInRemoteGitRepoCommandPackageCmdSet" value="{583a97cb-eca1-494d-bec4-bf1095cd274b}">
       <IDSymbol name="MyMenuGroup" value="0x1020" />
+      <IDSymbol name="MyMenuGroup_se" value="0x1021" />
       <IDSymbol name="BrowseInRemoteGitRepoCommandId" value="0x0100" />
       <IDSymbol name="CopyRemoteGitRepoUrlCommandId" value="0x0101" />
+      <IDSymbol name="BrowseInRemoteGitRepoCommandId_se" value="0x0102" />
+      <IDSymbol name="CopyRemoteGitRepoUrlCommandId_se" value="0x0103" />
     </GuidSymbol>
 
     <GuidSymbol name="guidImages" value="{137a9a98-047b-4e91-942e-2cf754702770}" >

@@ -7,3 +7,4 @@ v1.1  2017-01-10
 v1.2  2017-01-11
 
 - Fix: context menu entries appearing even if the files are not in a Git repository
+- Fix: line number being included in the generated url whenever the file is open in code editor, even if menu entry is clicked from solution explorer

@@ -25,6 +25,8 @@ namespace Konamiman.BrowseInRemoteGitRepo
         /// </summary>
         public const int BrowseCommandId = 0x0100;
         public const int CopyCommandId = 0x0101;
+        public const int BrowseCommandId_se = 0x0102;
+        public const int CopyCommandId_se = 0x0103;
 
         /// <summary>
         /// Command menu group (command set GUID).
@@ -54,17 +56,29 @@ namespace Konamiman.BrowseInRemoteGitRepo
 
             var browseMenuCommandID = new CommandID(CommandSet, BrowseCommandId);
             var browseMenuItem = new OleMenuCommand(BrowseMenuItemCallback, browseMenuCommandID);
-            browseMenuItem.BeforeQueryStatus += MenuItemOnBeforeQueryStatus;
+            browseMenuItem.BeforeQueryStatus += (sender, e) => MenuItemOnBeforeQueryStatus(sender, true);
             commandService.AddCommand(browseMenuItem);
 
             var copyMenuCommandID = new CommandID(CommandSet, CopyCommandId);
             var copyMenuItem = new OleMenuCommand(CopyMenuItemCallback, copyMenuCommandID);
-            copyMenuItem.BeforeQueryStatus += MenuItemOnBeforeQueryStatus;
+            copyMenuItem.BeforeQueryStatus += (sender, e) => MenuItemOnBeforeQueryStatus(sender, true);
             commandService.AddCommand(copyMenuItem);
+
+            //These are for solution explorer
+
+            var browseMenuCommandID_se = new CommandID(CommandSet, BrowseCommandId_se);
+            var browseMenuItem_se = new OleMenuCommand(BrowseMenuItemCallback, browseMenuCommandID_se);
+            browseMenuItem_se.BeforeQueryStatus += (sender, e) => MenuItemOnBeforeQueryStatus(sender, false);
+            commandService.AddCommand(browseMenuItem_se);
+
+            var copyMenuCommandID_se = new CommandID(CommandSet, CopyCommandId_se);
+            var copyMenuItem_se = new OleMenuCommand(CopyMenuItemCallback, copyMenuCommandID_se);
+            copyMenuItem_se.BeforeQueryStatus += (sender, e) => MenuItemOnBeforeQueryStatus(sender, false);
+            commandService.AddCommand(copyMenuItem_se);
         }
 
         //http://www.diaryofaninja.com/blog/2014/02/18/who-said-building-visual-studio-extensions-was-hard
-        private void MenuItemOnBeforeQueryStatus(object sender, EventArgs eventArgs)
+        private void MenuItemOnBeforeQueryStatus(object sender, bool showLineNumber)
         {
             fileName = null;
 
@@ -104,13 +118,13 @@ namespace Konamiman.BrowseInRemoteGitRepo
                 Show($"Error when invoking git:\r\n\r\n{ex.Message}\r\n\r\n(is the location of git.exe in PATH?)");
             }
 
-            var textView = GetIVsTextView(fileName);
-            if(textView == null) {
-                line = -1;
-            }
-            else {
-                int column;
-                textView.GetCaretPos(out line, out column);
+            line = -1;
+            if(showLineNumber) {
+                var textView = GetIVsTextView(fileName);
+                if (textView != null) {
+                    int column;
+                    textView.GetCaretPos(out line, out column);
+                }
             }
 
             menuCommand.Visible = true;

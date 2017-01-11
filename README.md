@@ -23,10 +23,6 @@ The default action of the _"Browse in remote repository"_ command is to open the
 
 For example, if you want the command to always open Firefox, run the following: `git config --global Konamiman.BrowseInRemoteGitRepo.BrowseCommandTemplate "\"C:\Program Files (x86)\Mozilla Firefox\firefox.exe\" {0}"`
 
-### Known problems ###
-
-* The generated URL will always contain the line number if the file is open in Visual Studio, even if the command was executed through Solution Explorer.
-
 ### Finally... ###
 
 This is my first Visual Studio extension, so please forgive all the rough edges. Suggestions/Pull Requests are more than welcome.
