@@ -330,6 +330,18 @@ namespace Konamiman.BrowseInRemoteGitRepo
                 if(baseUrl.EndsWith(".git"))
                     baseUrl = baseUrl.Substring(0, baseUrl.Length - 4);
 
+                if (baseUrl.StartsWith("git@")) {
+                    // Try converting this from an SSH url to an https url.
+                    // For example, this transforms "git@github.com:Konamiman/BrowseInRemoteGitRepository" into
+                    // "https://github.com/Konamiman/BrowseInRemoteGitRepository".
+                    // Maybe there should be a config option for http vs https, but for now https seems like the better default.
+
+                    var colonIndex = baseUrl.IndexOf(':');
+                    if (colonIndex != -1 && colonIndex + 1 < baseUrl.Length)
+                        baseUrl = "https://" + baseUrl.Substring(4, colonIndex - 4) + "/" + baseUrl.Substring(colonIndex + 1);
+                }
+
+
                 var baseLocalRepoRoot = RunGitCommand("rev-parse --show-toplevel");
 
                 if (baseUrl.Contains("{0}"))

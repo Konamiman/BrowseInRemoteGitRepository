@@ -15,7 +15,9 @@ The format of the generated URL is `<remote base URL>/blob/<branch name>/<file p
 
 ### Configuring the remote base URL ###
 
-By default the base URL for the remote repository will be obtained by executing `git config --get remote.origin.url`. For the cases where this does not work as expected (the schema for the remote URL is not `http[s]://` or there is actually no remote configured for the local repository, for example), it is possible to manually set the base url by executing the following in the local repository: `git config Konamiman.BrowseInRemoteGitRepo.BaseUrl <base URL>`.
+By default the base URL for the remote repository will be obtained by executing `git config --get remote.origin.url`. If the base URL is SSH based (it starts with `git@`) it will be automatically converted to the HTTPS equivalent.
+
+For the cases where this does not work as expected (the schema for the remote URL is not `http[s]://` or `git@`, or there is actually no remote configured for the local repository, for example), it is possible to manually set the base url by executing the following in the local repository: `git config Konamiman.BrowseInRemoteGitRepo.BaseUrl <base URL>`.
 
 If the supplied value includes the token `{0}`, it will be replaced with the last part of the local repository directory name (so `xyz` for `c:\abc\def\xyz`). This may be useful if you have all your projects under the same account of the same provider and want to set a global value for the setting (add `--global` when creating the setting for this).
 
