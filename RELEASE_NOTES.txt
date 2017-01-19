@@ -1,4 +1,4 @@
-v1.4  2017-01-17
+v1.4  2017-01-19
 
 - SSH base URLs are now automatically converted to HTTPS, no need to manually configure it
 
@@ -19,5 +19,3 @@ v1.1  2017-01-10
 
 - Fix: context menu entries not appearing in code editor for .cshtml files
 - Fix: context menu entries not appearing in solution explorer when using "Open Web Site"
-
-
