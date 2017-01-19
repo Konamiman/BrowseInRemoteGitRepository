@@ -4,6 +4,8 @@ This is a simple Visual Studio extension that adds two entries, _"Browse in remo
 
 The format of the generated URL is `<remote base URL>/blob/<branch name>/<file path and name>`. When clicking in the code editor, `#L<line number>` is added as well. This format is compatible with [GitHub](http://github.com) and [GitLab](http://gitlab.com).
 
+**Note:** You need Visual Studio 2017 to open the solution.
+
 ### Requirements ###
 
 * `git.exe` location must be in the PATH variable.
