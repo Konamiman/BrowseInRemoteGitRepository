@@ -347,8 +347,11 @@ namespace Konamiman.BrowseInRemoteGitRepo
                 if (baseUrl.Contains("{0}"))
                     baseUrl = string.Format(baseUrl, Path.GetFileName(baseLocalRepoRoot));
 
-                var fullUrl = baseUrl + "/blob/" + branch + "/" +
-                          fileName.Replace('\\', '/').Replace(baseLocalRepoRoot, "").Trim('/');
+                var gittedFilename = fileName.Replace('\\', '/').Replace(baseLocalRepoRoot, "").Trim('/');
+                var escapedGittedFilename = gittedFilename.Replace(@"/", @"\/");
+                gittedFilename = RunGitCommand($"ls-files | findstr -I {escapedGittedFilename}", baseLocalRepoRoot);
+
+                var fullUrl = baseUrl + "/blob/" + branch + "/" + gittedFilename;
                 if (line != -1)
                     fullUrl += "#L" + (line + 1);
 
@@ -385,7 +388,7 @@ git config {configKey_BaseUrl} <base URL>");
         }
 
         //http://stackoverflow.com/a/6119394/4574
-        private string RunGitCommand(string command)
+        private string RunGitCommand(string command, string workingDirectory = null)
         {
             lastGitCommandExecuted = command;
 
@@ -394,14 +397,14 @@ git config {configKey_BaseUrl} <base URL>");
                 CreateNoWindow = true,
                 RedirectStandardError = true,
                 RedirectStandardOutput = true,
-                FileName = "git.exe",
+                FileName = "cmd.exe",
+                Arguments = $@"/C ""git {command}""",
                 UseShellExecute = false
             };
 
-
             var gitProcess = new Process();
-            gitInfo.Arguments = command;
-            gitInfo.WorkingDirectory = filePath;
+            //gitInfo.Arguments = command;
+            gitInfo.WorkingDirectory = workingDirectory ?? filePath;
 
             gitProcess.StartInfo = gitInfo;
             gitProcess.Start();

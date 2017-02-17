@@ -1,3 +1,7 @@
+v1.5  2017-02-17
+
+- git ls-files is now used to get the file paths and names as they exist in the repository, this prevents issues when there is a casing mismatch with the name that appears in the project file.
+
 v1.4  2017-01-19
 
 - SSH base URLs are now automatically converted to HTTPS, no need to manually configure it
