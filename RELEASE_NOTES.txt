@@ -1,6 +1,12 @@
+v1.6  2017-05-30
+
+- git rev-parse is now used instead of git status to check if the current solution is living in a repository, much faster and prevents VS from hanging if there is a lot of pending changes
+
+
 v1.5  2017-02-17
 
 - git ls-files is now used to get the file paths and names as they exist in the repository, this prevents issues when there is a casing mismatch with the name that appears in the project file.
+
 
 v1.4  2017-01-19
 

@@ -109,13 +109,14 @@ namespace Konamiman.BrowseInRemoteGitRepo
             filePath = Path.GetDirectoryName(fileName);
 
             try {
-                RunGitCommand("status");
+                RunGitCommand("-C . rev-parse");
             }
             catch(GitException) {
                 return; //assume no Git repo
             }
             catch(Exception ex) {
                 Show($"Error when invoking git:\r\n\r\n{ex.Message}\r\n\r\n(is the location of git.exe in PATH?)");
+                return;
             }
 
             line = -1;
