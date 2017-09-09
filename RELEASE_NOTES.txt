@@ -1,3 +1,10 @@
+v1.7  2017-09-10
+
+- If the command is executed over a multiline text selection, the url will end with "#Lstart-Lend", thus rendering these lines as selected in the browser.
+- git rev-parse is now used instead of git branch to get the current branch name (except if there's a rebase in progress, see below)
+- Best-effort rebase-in-progress support implemented: if git rev-parse gives "HEAD" as the current branch name, git branch is used, then a line with the format "* (no branch, rebasing branchname)" is searched for in the output, and the branch name is extracted from there.
+
+
 v1.6  2017-05-30
 
 - git rev-parse is now used instead of git status to check if the current solution is living in a repository, much faster and prevents VS from hanging if there is a lot of pending changes

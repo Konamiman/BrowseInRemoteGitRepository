@@ -1,27 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
-  <Metadata>
-    <Identity Id="Konamiman.BrowseInRemoteGitRepo.34224d0e-a924-4690-844d-f2385996b08c" Version="1.6" Language="en-US" Publisher="Néstor Soriano Vilchez" />
-    <DisplayName>Browse in remote Git repository</DisplayName>
-    <Description xml:space="preserve">Adds "Browse in remote Git repository" to context menu in solution explorer and in the code editor.</Description>
-    <MoreInfo>https://github.com/Konamiman/BrowseInRemoteGitRepository</MoreInfo>
-    <License>LICENSE.txt</License>
-    <GettingStartedGuide>https://marketplace.visualstudio.com/items?itemName=MSXrules.BrowseinremoteGitrepository</GettingStartedGuide>
-    <ReleaseNotes>RELEASE_NOTES.txt</ReleaseNotes>
-    <Tags>Git</Tags>
-  </Metadata>
-  <Installation>
-    <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[14.0, 15.0]" />
-  </Installation>
-  <Dependencies>
-    <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="[4.5,)" />
-    <Dependency Id="Microsoft.VisualStudio.MPF.14.0" DisplayName="Visual Studio MPF 14.0" d:Source="Installed" Version="[14.0,16.0)" />
-  </Dependencies>
-  <Assets>
-    <Asset Type="Microsoft.VisualStudio.VsPackage" d:Source="Project" d:ProjectName="%CurrentProject%" Path="|%CurrentProject%;PkgdefProjectOutputGroup|" />
-  </Assets>
-  <Prerequisites>
-    <Prerequisite Id="Microsoft.Net.Component.4.5.2.TargetingPack" Version="[14.0,16.0)" DisplayName=".NET Framework 4.5.2 targeting pack" />
-    <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor" Version="[14.0,16.0)" DisplayName="Visual Studio core editor" />
-  </Prerequisites>
+    <Metadata>
+        <Identity Id="Konamiman.BrowseInRemoteGitRepo.34224d0e-a924-4690-844d-f2385996b08c" Version="1.7" Language="en-US" Publisher="Néstor Soriano Vilchez" />
+        <DisplayName>Browse in remote Git repository</DisplayName>
+        <Description xml:space="preserve">Adds "Browse in remote Git repository" to context menu in solution explorer and in the code editor.</Description>
+        <MoreInfo>https://github.com/Konamiman/BrowseInRemoteGitRepository</MoreInfo>
+        <License>LICENSE.txt</License>
+        <GettingStartedGuide>https://marketplace.visualstudio.com/items?itemName=MSXrules.BrowseinremoteGitrepository</GettingStartedGuide>
+        <ReleaseNotes>RELEASE_NOTES.txt</ReleaseNotes>
+        <Tags>Git</Tags>
+    </Metadata>
+    <Installation>
+        <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[14.0, 15.0]" />
+    </Installation>
+    <Dependencies>
+        <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="[4.5,)" />
+        <Dependency Id="Microsoft.VisualStudio.MPF.14.0" DisplayName="Visual Studio MPF 14.0" d:Source="Installed" Version="[14.0,16.0)" />
+    </Dependencies>
+    <Assets>
+        <Asset Type="Microsoft.VisualStudio.VsPackage" d:Source="Project" d:ProjectName="%CurrentProject%" Path="|%CurrentProject%;PkgdefProjectOutputGroup|" />
+    </Assets>
+    <Prerequisites>
+        <Prerequisite Id="Microsoft.Net.Component.4.5.2.TargetingPack" Version="[14.0,16.0)" DisplayName=".NET Framework 4.5.2 targeting pack" />
+        <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor" Version="[14.0,16.0)" DisplayName="Visual Studio core editor" />
+    </Prerequisites>
 </PackageManifest>

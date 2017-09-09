@@ -122,10 +122,7 @@ namespace Konamiman.BrowseInRemoteGitRepo
             line = -1;
             if(showLineNumber) {
                 var textView = GetIVsTextView(fileName);
-                if (textView != null) {
-                    int column;
-                    textView.GetCaretPos(out line, out column);
-                }
+                textView?.GetSelection(out line, out int dummyColumn, out endLine, out int dummyEndColumn);
             }
 
             menuCommand.Visible = true;
@@ -135,6 +132,7 @@ namespace Konamiman.BrowseInRemoteGitRepo
         private string fileName;
         private string filePath;
         private int line;
+        private int endLine;
         private string lastGitCommandExecuted;
 
         //http://www.diaryofaninja.com/blog/2014/02/18/who-said-building-visual-studio-extensions-was-hard
@@ -307,10 +305,15 @@ namespace Konamiman.BrowseInRemoteGitRepo
             try {
                 string branch;
                 try {
-                    branch = RunGitCommand("branch")
-                        .Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)
-                        .Single(x => x.StartsWith("*"))
-                        .Substring(2);
+                    branch = RunGitCommand("rev-parse --abbrev-ref HEAD");
+                    if (branch == "HEAD")
+                    {
+                        branch = RunGitCommand("branch")
+                            .Split(new[] {'\r', '\n'}, StringSplitOptions.RemoveEmptyEntries)
+                            .SingleOrDefault(x => x.StartsWith("* (no branch"));
+                        branch = branch?.Substring(branch.LastIndexOf(' ') + 1).TrimEnd(')') 
+                            ?? "master";
+                    }
                 }
                 catch(Exception ex) when(!(ex is GitException)) {
                     Show("Unexpected output from 'git branch'");
@@ -353,8 +356,12 @@ namespace Konamiman.BrowseInRemoteGitRepo
                 gittedFilename = RunGitCommand($"ls-files | findstr -I {escapedGittedFilename}", baseLocalRepoRoot);
 
                 var fullUrl = baseUrl + "/blob/" + branch + "/" + gittedFilename;
-                if (line != -1)
+                if (line != -1) {
                     fullUrl += "#L" + (line + 1);
+                    if (endLine != line) {
+                        fullUrl += "-L" + (endLine + 1);
+                    }
+                }
 
                 if(validateUrl && 
                     !fullUrl.StartsWith("http://", StringComparison.InvariantCultureIgnoreCase) &&

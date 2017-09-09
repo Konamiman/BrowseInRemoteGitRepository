@@ -2,7 +2,7 @@
 
 This is a simple Visual Studio extension that adds two entries, _"Browse in remote repository"_ and _"Copy URL of remote repository version"_, to the context menu when right clicking a file in solution Explorer, or in the code editor for open files, provided that the solution lives in a Git repository with a configured remote. This is useful when you are coding collaboratively and want to point a specific piece of code to another person.
 
-The format of the generated URL is `<remote base URL>/blob/<branch name>/<file path and name>`. When clicking in the code editor, `#L<line number>` is added as well. This format is compatible with [GitHub](http://github.com) and [GitLab](http://gitlab.com).
+The format of the generated URL is `<remote base URL>/blob/<branch name>/<file path and name>`. When clicking in the code editor, `#L<line number>` is added as well; and if the command is invoked over a multiline selection, `-L<end line number>` is added to that. This format is compatible with [GitHub](http://github.com) and [GitLab](http://gitlab.com).
 
 **Note:** You need Visual Studio 2017 to open the solution.
 
