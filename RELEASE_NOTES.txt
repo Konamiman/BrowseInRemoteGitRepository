@@ -1,4 +1,4 @@
-v1.8  2018-09-22
+v1.8  2017-09-22
 
 - Fix: commands not working for files with spaces in the name (filename wasn't surrounded with quotes when passed to git ls-files).
 - Fix: generated urls for multiline selections created from the bottom end with "L(last line)-L(first line)", and are therefore not rendered properly in the browser.
