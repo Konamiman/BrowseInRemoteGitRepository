@@ -20,6 +20,8 @@ namespace Konamiman.BrowseInRemoteGitRepo
         const string configKey_BrowseCommandFormatString = "Konamiman.BrowseInRemoteGitRepo.BrowseCommandTemplate";
         const string configKey_BaseUrl = "Konamiman.BrowseInRemoteGitRepo.BaseUrl";
 
+        private readonly char[] newLineSeparators = new char[] {'\r', '\n'};
+
         /// <summary>
         /// Command IDs.
         /// </summary>
@@ -352,14 +354,14 @@ namespace Konamiman.BrowseInRemoteGitRepo
                     baseUrl = string.Format(baseUrl, Path.GetFileName(baseLocalRepoRoot));
 
                 var gittedFilename = fileName.Replace('\\', '/').Replace(baseLocalRepoRoot, "").Trim('/');
-                var escapedGittedFilename = gittedFilename.Replace(@"/", @"\/");
-                gittedFilename = RunGitCommand($"ls-files | findstr -I {escapedGittedFilename}", baseLocalRepoRoot);
+                gittedFilename = RunGitCommand($"ls-files \"{gittedFilename}\"", baseLocalRepoRoot)
+                    .Split(newLineSeparators, StringSplitOptions.RemoveEmptyEntries)[0];
 
                 var fullUrl = baseUrl + "/blob/" + branch + "/" + gittedFilename;
                 if (line != -1) {
-                    fullUrl += "#L" + (line + 1);
+                    fullUrl += "#L" + (Math.Min(line, endLine) + 1);
                     if (endLine != line) {
-                        fullUrl += "-L" + (endLine + 1);
+                        fullUrl += "-L" + (Math.Max(line, endLine) + 1);
                     }
                 }
 

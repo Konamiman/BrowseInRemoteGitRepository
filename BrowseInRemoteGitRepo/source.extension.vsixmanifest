@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="Konamiman.BrowseInRemoteGitRepo.34224d0e-a924-4690-844d-f2385996b08c" Version="1.7" Language="en-US" Publisher="Néstor Soriano Vilchez" />
+        <Identity Id="Konamiman.BrowseInRemoteGitRepo.34224d0e-a924-4690-844d-f2385996b08c" Version="1.8" Language="en-US" Publisher="Néstor Soriano Vilchez" />
         <DisplayName>Browse in remote Git repository</DisplayName>
         <Description xml:space="preserve">Adds "Browse in remote Git repository" to context menu in solution explorer and in the code editor.</Description>
         <MoreInfo>https://github.com/Konamiman/BrowseInRemoteGitRepository</MoreInfo>
