@@ -19,7 +19,8 @@ namespace Konamiman.BrowseInRemoteGitRepo
     {
         const string configKey_BrowseCommandFormatString = "Konamiman.BrowseInRemoteGitRepo.BrowseCommandTemplate";
         const string configKey_BaseUrl = "Konamiman.BrowseInRemoteGitRepo.BaseUrl";
-
+        const string configKey_UrlPattern = "Konamiman.BrowseInRemoteGitRepo.UrlPattern";
+        
         private readonly char[] newLineSeparators = new char[] {'\r', '\n'};
 
         /// <summary>
@@ -326,7 +327,11 @@ namespace Konamiman.BrowseInRemoteGitRepo
                     RunGitCommand($"config --get {configKey_BaseUrl}") ??
                     RunGitCommand("config --get remote.origin.url");
 
-                if(baseUrl == null) {
+                var urlPattern =
+                    RunGitCommand($"config --get {configKey_UrlPattern}") ??
+                    "{baseUrl}/blob/{branch}/{filepath}";
+
+                if (baseUrl == null) {
                     Show($"There's no remote (remote.origin.url) nor manual base URL ({configKey_BaseUrl}) configured for this repository");
                     return;
                 }
@@ -357,7 +362,7 @@ namespace Konamiman.BrowseInRemoteGitRepo
                 gittedFilename = RunGitCommand($"ls-files \"{gittedFilename}\"", baseLocalRepoRoot)
                     .Split(newLineSeparators, StringSplitOptions.RemoveEmptyEntries)[0];
 
-                var fullUrl = baseUrl + "/blob/" + branch + "/" + gittedFilename;
+                var fullUrl = urlPattern.Replace("{baseUrl}", baseUrl).Replace("{branch}", branch).Replace("{filepath}", gittedFilename);
                 if (line != -1) {
                     fullUrl += "#L" + (Math.Min(line, endLine) + 1);
                     if (endLine != line) {

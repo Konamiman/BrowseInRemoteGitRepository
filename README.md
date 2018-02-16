@@ -21,6 +21,12 @@ For the cases where this does not work as expected (the schema for the remote UR
 
 If the supplied value includes the token `{0}`, it will be replaced with the last part of the local repository directory name (so `xyz` for `c:\abc\def\xyz`). This may be useful if you have all your projects under the same account of the same provider and want to set a global value for the setting (add `--global` when creating the setting for this).
 
+### Configuring the URL pattern ###
+
+By default the full remote URL is constructed with the following pattern `{baseUrl}/blob/{branch}/{filepath}` where `{baseUrl}` is substituted with the base URL as discussed, `{branch}` is substituted with the branch name, and `{filepath}` is substituted with the relative path and name of the file in the repository.
+
+This pattern can be overridden by executing `git config Konamiman.BrowseInRemoteGitRepo.UrlPattern <URL pattern>`.
+
 ### Configuring the command executed for browsing ###
 
 The default action of the _"Browse in remote repository"_ command is to open the full remote URL of the file in the default browser. If you want a different behavior (such as using a different browser or adding extra command line options) you can do so by executing `git config Konamiman.BrowseInRemoteGitRepo.BrowseCommandTemplate <command  template>`, you must add a `{0}` token to the template that will be replaced with the remote URL of the file. Again, add `--global` if necessary.
