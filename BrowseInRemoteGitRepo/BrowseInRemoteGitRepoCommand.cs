@@ -19,7 +19,7 @@ namespace Konamiman.BrowseInRemoteGitRepo
     {
         const string configKey_BrowseCommandFormatString = "Konamiman.BrowseInRemoteGitRepo.BrowseCommandTemplate";
         const string configKey_BaseUrl = "Konamiman.BrowseInRemoteGitRepo.BaseUrl";
-        const string configKey_UrlPattern = "Konamiman.BrowseInRemoteGitRepo.UrlPattern";
+        const string configKey_ServerType = "Konamiman.BrowseInRemoteGitRepo.ServerType";
         
         private readonly char[] newLineSeparators = new char[] {'\r', '\n'};
 
@@ -30,6 +30,93 @@ namespace Konamiman.BrowseInRemoteGitRepo
         public const int CopyCommandId = 0x0101;
         public const int BrowseCommandId_se = 0x0102;
         public const int CopyCommandId_se = 0x0103;
+
+        /// <summary>
+        /// Server Type Enum
+        /// </summary>
+        enum ServerType { GitHub, GitLab, BitbucketCloud, BitbucketServer }
+
+        /// <summary>
+        /// Maps the config string (configKey_ServerType) to the matching enum value
+        /// </summary>
+        /// <param name="serverType">Config string</param>
+        /// <returns></returns>
+        private ServerType? ServerTypeFromString(string serverType)
+        {
+            switch(serverType.ToLower())
+            {
+                case "github":
+                    return ServerType.GitHub;
+                case "gitlab":
+                    return ServerType.GitLab;
+                case "bitbucketcloud":
+                    return ServerType.BitbucketCloud;
+                case "bitbucketserver":
+                    return ServerType.BitbucketServer;
+                default:
+                    return null;
+            }
+        }
+
+        /// <summary>
+        /// Attempts to guess the server type from the baseUrl
+        /// </summary>
+        /// <param name="baseUrl">Base url</param>
+        /// <returns></returns>
+        private ServerType GuessServerTypeFromBaseUrl(string baseUrl)
+        {
+            if(baseUrl.Contains("github.com"))
+                return ServerType.GitHub;
+            if(baseUrl.Contains("gitlab.com"))
+                return ServerType.GitLab;
+            if(baseUrl.Contains("bitbucket.org"))
+                return ServerType.BitbucketCloud;
+            
+            // default
+            return ServerType.GitHub;
+        }
+
+        /// <summary>
+        /// Returns the associated url pattern for the serverType
+        /// </summary>
+        /// <param name="serverType">Server type enum</param>
+        /// <returns></returns>
+        private string ServerUrlPattern(ServerType serverType)
+        {
+            switch(serverType)
+            {
+                default:
+                case ServerType.GitHub:
+                case ServerType.GitLab:
+                    return "{baseUrl}/blob/{branch}/{filePath}";
+                case ServerType.BitbucketCloud:
+                    return "{baseUrl}/src/{branch}/{filePath}";
+                case ServerType.BitbucketServer:
+                    return "{baseUrl}/browse/{filePath}?at=refs/heads/{branch}";
+            }
+        }
+
+        /// <summary>
+        /// Returns the associated line anchor for the serverType
+        /// </summary>
+        /// <param name="serverType">Server type enum</param>
+        /// <param name="startline">Start line</param>
+        /// <param name="endLine">End line, should equal startLine if single line is selected</param>
+        /// <returns></returns>
+        private string ServerLinePattern(ServerType serverType, int startLine, int endLine)
+        {
+            switch(serverType)
+            {
+                default:
+                case ServerType.GitHub:
+                case ServerType.GitLab:
+                    return "#L" + startLine + ((startLine != endLine) ? "-L" + endLine : "");
+                case ServerType.BitbucketCloud:
+                    return "#lines-" + startLine + ((startLine != endLine) ? ":" + endLine : "");
+                case ServerType.BitbucketServer:
+                    return "#" + startLine + ((startLine != endLine) ? "-" + endLine : "");
+            }
+        }
 
         /// <summary>
         /// Command menu group (command set GUID).
@@ -327,9 +414,9 @@ namespace Konamiman.BrowseInRemoteGitRepo
                     RunGitCommand($"config --get {configKey_BaseUrl}") ??
                     RunGitCommand("config --get remote.origin.url");
 
-                var urlPattern =
-                    RunGitCommand($"config --get {configKey_UrlPattern}") ??
-                    "{baseUrl}/blob/{branch}/{filepath}";
+                var serverType = 
+                    ServerTypeFromString(RunGitCommand($"config --get {configKey_ServerType}")) ??
+                    GuessServerTypeFromBaseUrl(baseUrl);
 
                 if (baseUrl == null) {
                     Show($"There's no remote (remote.origin.url) nor manual base URL ({configKey_BaseUrl}) configured for this repository");
@@ -362,12 +449,10 @@ namespace Konamiman.BrowseInRemoteGitRepo
                 gittedFilename = RunGitCommand($"ls-files \"{gittedFilename}\"", baseLocalRepoRoot)
                     .Split(newLineSeparators, StringSplitOptions.RemoveEmptyEntries)[0];
 
-                var fullUrl = urlPattern.Replace("{baseUrl}", baseUrl).Replace("{branch}", branch).Replace("{filepath}", gittedFilename);
+                var fullUrl = ServerUrlPattern(serverType).Replace("{baseUrl}", baseUrl).Replace("{branch}", branch).Replace("{filePath}", gittedFilename);
+                
                 if (line != -1) {
-                    fullUrl += "#L" + (Math.Min(line, endLine) + 1);
-                    if (endLine != line) {
-                        fullUrl += "-L" + (Math.Max(line, endLine) + 1);
-                    }
+                    fullUrl += ServerLinePattern(serverType, Math.Min(line, endLine) + 1, Math.Max(line, endLine) + 1);
                 }
 
                 if(validateUrl && 
