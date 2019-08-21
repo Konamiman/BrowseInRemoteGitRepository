@@ -2,7 +2,7 @@
 
 This is a simple Visual Studio extension that adds two entries, _"Browse in remote repository"_ and _"Copy URL of remote repository version"_, to the context menu when right clicking a file in solution Explorer, or in the code editor for open files, provided that the solution lives in a Git repository with a configured remote. This is useful when you are coding collaboratively and want to point a specific piece of code to another person.
 
-The format of the generated URL is `<remote base URL>/blob/<branch name>/<file path and name>`. When clicking in the code editor, `#L<line number>` is added as well; and if the command is invoked over a multiline selection, `-L<end line number>` is added to that. This format is compatible with [GitHub](http://github.com) and [GitLab](http://gitlab.com).
+Supports [GitHub](http://github.com), [GitLab](http://gitlab.com), [Bitbucket Cloud](https://bitbucket.org/), and [Bitbucket Server](https://www.atlassian.com/software/bitbucket/enterprise). See server type configuration for associated URL formats
 
 **Note:** You need Visual Studio 2017 to open the solution.
 
@@ -20,6 +20,18 @@ By default the base URL for the remote repository will be obtained by executing 
 For the cases where this does not work as expected (the schema for the remote URL is not `http[s]://` or `git@`, or there is actually no remote configured for the local repository, for example), it is possible to manually set the base url by executing the following in the local repository: `git config Konamiman.BrowseInRemoteGitRepo.BaseUrl <base URL>`.
 
 If the supplied value includes the token `{0}`, it will be replaced with the last part of the local repository directory name (so `xyz` for `c:\abc\def\xyz`). This may be useful if you have all your projects under the same account of the same provider and want to set a global value for the setting (add `--global` when creating the setting for this).
+
+### Configuring the server type ###
+
+By default the server type is guessed based on the base URL and should only need to be overridden for a custom domain.
+
+The server type can be overridden by executing `git config Konamiman.BrowseInRemoteGitRepo.ServerType <server type>`.
+
+|server type|URL format|Line anchor format|
+|-----------|----------|-----------|
+|"GitHub" or "GitLab"|`<remote base URL>/blob/<branch name>/<file path and name>`|`#L<line number>[-L<end line number>]`|
+|"BitbucketCloud"|`<remote base URL>/src/<branch name>/<file path and name>`|`#line-<line number>[:<end line number>]`|
+|"BitbucketServer"|`<remote base URL>/browse/<file path and name>?at=refs/heads/<branch name>` |`#<line number>[<end line number>]`|
 
 ### Configuring the command executed for browsing ###
 
